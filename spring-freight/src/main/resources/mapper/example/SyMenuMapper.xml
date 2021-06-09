@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wiki.zex.cloud.example.mapper.SyMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wiki.zex.cloud.example.entity.SyMenu">
+        <id column="id" property="id"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="menu_code" property="menuCode"/>
+        <result column="menu_icon" property="menuIcon"/>
+        <result column="menu_path" property="menuPath"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="create_at" property="createAt"/>
+        <result column="description" property="description"/>
+        <result column="redirect" property="redirect"/>
+        <result column="component" property="component"/>
+        <result column="seq" property="seq"/>
+    </resultMap>
+    <select id="getListByUserId" resultType="wiki.zex.cloud.example.entity.SyMenu">
+
+        SELECT sm.id,
+               sm.menu_name,
+               sm.menu_code,
+               sm.menu_icon,
+               sm.menu_path,
+               sm.parent_id,
+               sm.description,
+               sm.redirect,
+               sm.component,
+               sm.seq,
+               sm.hidden,
+               sm.create_at
+        FROM sy_menu sm
+
+                 LEFT JOIN sy_role_menu_rel srmr on srmr.menu_id = sm.id
+
+                 LEFT JOIN sy_user_role_rel surr on surr.role_id = srmr.role_id AND surr.user_id = #{userId}
+
+        WHERE surr.user_id = #{userId}
+
+        GROUP BY sm.id ,sm.seq
+
+        order by sm.seq desc
+
+    </select>
+    <select id="getByRoleId" resultType="wiki.zex.cloud.example.entity.SyMenu">
+        select sm.id,
+               sm.menu_name,
+               sm.menu_code,
+               sm.menu_icon,
+               sm.menu_path,
+               sm.parent_id,
+               sm.description,
+               sm.redirect,
+               sm.component,
+               sm.seq,
+               sm.hidden,
+               sm.create_at
+        from sy_menu sm
+                 left join
+             sy_role_menu_rel srmr on sm.id = srmr.menu_id
+        where srmr.role_id = #{roleId}
+    </select>
+
+</mapper>

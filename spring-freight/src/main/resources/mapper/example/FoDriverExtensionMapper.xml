@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wiki.zex.cloud.example.mapper.FoDriverExtensionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wiki.zex.cloud.example.entity.FoDriverExtension">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="car_long" property="carLong"/>
+        <result column="car_model" property="carModel"/>
+        <result column="create_at" property="createAt"/>
+        <result column="nature" property="nature"/>
+    </resultMap>
+    <select id="findPage" resultType="wiki.zex.cloud.example.resp.FoDriverExtensionResp">
+        select fde.id,
+               fde.user_id,
+               fde.car_long,
+               fde.car_model,
+               fde.create_at,
+               fde.nature,
+               fde.car_no,
+               fde.vehicle_license,
+               fde.vehicle_license_backend,
+               fde.audit_status,
+               fde.identity_card,
+               fde.identity_card_backend,
+               fde.identity_card_take,
+               fde.avatar,
+               fde.real_name,
+               fde.driver_license,
+               fde.driver_license_backend,
+               fde.car_group_photo,
+               su.mobile
+        from fo_driver_extension fde
+        left join sy_user su on fde.user_id = su.id
+        <where>
+            1=1
+            <if test="auditStatus != null">
+                and fde.audit_status = #{auditStatus}
+            </if>
+        </where>
+    </select>
+
+</mapper>

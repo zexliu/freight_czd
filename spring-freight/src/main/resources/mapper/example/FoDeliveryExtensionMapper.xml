@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wiki.zex.cloud.example.mapper.FoDeliveryExtensionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wiki.zex.cloud.example.entity.FoDeliveryExtension">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="nature" property="nature"/>
+    </resultMap>
+    <select id="findPage" resultType="wiki.zex.cloud.example.resp.FoDeliveryExtensionResp">
+        select fde.id,
+        fde.user_id,
+        fde.nature,
+        fde.create_at,
+        fde.business_license,
+        fde.audit_status,
+        fde.identity_card,
+        fde.identity_card_backend,
+        fde.identity_card_take,
+        fde.avatar,
+        fde.real_name,
+        fde.shop_group_photo,
+        su.mobile,
+        fde.company_name
+        from fo_delivery_extension fde
+        left join sy_user su on fde.user_id = su.id
+        <where>
+            1=1
+            <if test="auditStatus != null">
+                and fde.audit_status = #{auditStatus}
+            </if>
+        </where>
+    </select>
+
+</mapper>

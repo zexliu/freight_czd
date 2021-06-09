@@ -1,0 +1,105 @@
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+apply plugin: 'com.android.application'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'com.mob.sdk'
+
+MobSDK {
+    appKey "3059b5b2e0eab"
+    appSecret "030267290b9f02dbb3f3a69835c395b8"
+    mobEnv 'x'
+    MobPush {}
+}
+android {
+    compileSdkVersion 28
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "wiki.zex.freight.driver"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+    }
+
+
+    signingConfigs {
+        def alias = 'release'
+        def password = '666666'
+        def filePath = '/Users/zex/.android/release.jks'
+        debug {
+            keyAlias alias
+            keyPassword password
+            storeFile file(filePath)
+            storePassword(password)
+
+        }
+        release {
+            keyAlias alias
+            keyPassword password
+            storeFile file(filePath)
+            storePassword(password)
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+            debuggable true
+            jniDebuggable true
+            shrinkResources false
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            debuggable false
+            jniDebuggable false
+            shrinkResources false
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.multidex:multidex:2.0.0'
+    implementation project(path: ':faceplatform-ui')
+    implementation project(path: ':ocr_ui')
+
+}

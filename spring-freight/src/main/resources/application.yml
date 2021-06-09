@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: dev
+  flyway:
+    clean-on-validation-error: true
+  messages:
+    basename: i18n/messages
+    cache-duration: 3600
+    encoding: UTF-8
+mybatis-plus:
+  # 支持统配符 * 或者 ; 分割
+  typeEnumsPackage: wiki.zex.cloud.example.enums
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

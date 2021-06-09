@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wiki.zex.cloud.example.mapper.FoCallMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wiki.zex.cloud.example.entity.FoCall">
+        <id column="id" property="id"/>
+        <result column="from_user_id" property="fromUserId"/>
+        <result column="to_user_id" property="toUserId"/>
+        <result column="goods_id" property="goodsId"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
+        <result column="create_at" property="createAt"/>
+    </resultMap>
+    <select id="list" resultType="wiki.zex.cloud.example.resp.FoCallResp">
+        select fc.id,
+               fc.from_user_id,
+               fc.to_user_id,
+               fc.goods_id,
+               fc.type,
+               fc.status,
+               fc.create_at,
+               fdg.load_province_code,
+               fdg.load_city_code,
+               fdg.load_district_code,
+               fdg.unload_province_code,
+               fdg.unload_city_code,
+               fdg.unload_district_code,
+               fdg.car_longs,
+               fdg.car_models,
+               fdg.weight,
+               fdg.volume,
+               fsu.mobile   from_mobile,
+               fsu.avatar   from_avatar,
+               fsu.nickname from_nickname,
+               tsu.mobile   to_mobile,
+               tsu.avatar   to_avatar,
+               tsu.nickname to_nickname,
+               fdg.status   goodsStatus
+        from fo_call fc
+                 left join fo_deliver_goods fdg on fdg.id = fc.goods_id
+                 left join sy_user fsu on fsu.id = fc.from_user_id
+                 left join sy_user tsu on tsu.id = fc.to_user_id
+        where fc.from_user_id = #{userId}
+           or fc.to_user_id = #{userId}
+        group by fdg.id
+        order by max(fc.create_at) desc
+    </select>
+    <select id="calls" resultType="wiki.zex.cloud.example.resp.FoCallResp">
+        select fc.id,
+               fc.from_user_id,
+               fc.goods_id,
+               fc.type,
+               fc.status,
+               fc.create_at,
+               fsu.mobile   from_mobile,
+               fsu.avatar   from_avatar,
+               fsu.nickname from_nickname
+        from fo_call fc
+                 left join sy_user fsu on fsu.id = fc.from_user_id
+        where fc.type = 1 and fc.goods_id = #{deliverId}
+        group by fc.from_user_id
+    </select>
+
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wiki.zex.cloud.example.mapper.SyUserDeptRelMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wiki.zex.cloud.example.entity.SyUserDeptRel">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="dept_id" property="deptId" />
+    </resultMap>
+    <select id="getDeptIdsByUserId" resultType="java.lang.Long">
+        select  dept_id from sy_user_dept_rel where  user_id  = #{userId}
+    </select>
+
+</mapper>

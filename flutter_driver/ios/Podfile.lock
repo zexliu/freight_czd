@@ -1,0 +1,221 @@
+PODS:
+  - AMap3DMap (7.5.0):
+    - AMapFoundation (~> 1.6.3)
+  - amap_core_fluttify (0.0.1):
+    - AMapFoundation (~> 1.6)
+    - Flutter
+    - foundation_fluttify
+  - amap_location_fluttify (0.0.1):
+    - amap_core_fluttify
+    - AMapLocation (~> 2.6.5)
+    - Flutter
+    - foundation_fluttify
+  - amap_map_fluttify (0.0.1):
+    - AMap3DMap (~> 7.5.0)
+    - amap_core_fluttify
+    - Flutter
+    - foundation_fluttify
+    - url_launcher
+  - amap_search_fluttify (0.0.1):
+    - amap_core_fluttify
+    - AMapSearch (~> 7.3.0)
+    - Flutter
+    - foundation_fluttify
+  - AMapFoundation (1.6.4)
+  - AMapLocation (2.6.7):
+    - AMapFoundation (~> 1.6.4)
+  - AMapSearch (7.3.0):
+    - AMapFoundation (~> 1.6.3)
+  - BSGridCollectionViewLayout (1.2.5)
+  - BSImagePicker (2.10.3):
+    - BSGridCollectionViewLayout (= 1.2.5)
+    - BSImageView (= 1.0.3)
+  - BSImageView (1.0.3)
+  - connectivity (0.0.1):
+    - Flutter
+    - Reachability
+  - core_location_fluttify (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - fluttertoast (0.0.2):
+    - Flutter
+  - fluwx (0.0.1):
+    - Flutter
+    - WechatOpenSDK (= 1.8.7.1)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - foundation_fluttify (0.0.1):
+    - Flutter
+  - image_picker (0.0.1):
+    - Flutter
+  - map_launcher (0.0.1):
+    - Flutter
+  - mob_pushsdk (3.0.1):
+    - mob_pushsdk/MobPush (= 3.0.1)
+    - MOBFoundation
+  - mob_pushsdk/MobPush (3.0.1):
+    - MOBFoundation
+  - MOBFoundation (3.2.19)
+  - mobpush_plugin (1.0.7):
+    - Flutter
+    - mob_pushsdk
+  - multi_image_picker (4.7.15):
+    - BSImagePicker (~> 2.10.3)
+    - Flutter
+  - package_info (0.0.1):
+    - Flutter
+  - path_provider (0.0.1):
+    - Flutter
+  - "permission_handler (5.1.0+2)":
+    - Flutter
+  - Reachability (3.2)
+  - screen (0.0.1):
+    - Flutter
+  - shared_preferences (0.0.1):
+    - Flutter
+  - sqflite (0.0.1):
+    - Flutter
+    - FMDB (~> 2.7.2)
+  - url_launcher (0.0.1):
+    - Flutter
+  - video_player (0.0.1):
+    - Flutter
+  - wakelock (0.0.1):
+    - Flutter
+  - webview_flutter (0.0.1):
+    - Flutter
+  - WechatOpenSDK (1.8.7.1)
+
+DEPENDENCIES:
+  - amap_core_fluttify (from `.symlinks/plugins/amap_core_fluttify/ios`)
+  - amap_location_fluttify (from `.symlinks/plugins/amap_location_fluttify/ios`)
+  - amap_map_fluttify (from `.symlinks/plugins/amap_map_fluttify/ios`)
+  - amap_search_fluttify (from `.symlinks/plugins/amap_search_fluttify/ios`)
+  - connectivity (from `.symlinks/plugins/connectivity/ios`)
+  - core_location_fluttify (from `.symlinks/plugins/core_location_fluttify/ios`)
+  - Flutter (from `Flutter`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - fluwx (from `.symlinks/plugins/fluwx/ios`)
+  - foundation_fluttify (from `.symlinks/plugins/foundation_fluttify/ios`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
+  - map_launcher (from `.symlinks/plugins/map_launcher/ios`)
+  - mobpush_plugin (from `.symlinks/plugins/mobpush_plugin/ios`)
+  - multi_image_picker (from `.symlinks/plugins/multi_image_picker/ios`)
+  - package_info (from `.symlinks/plugins/package_info/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - screen (from `.symlinks/plugins/screen/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
+  - video_player (from `.symlinks/plugins/video_player/ios`)
+  - wakelock (from `.symlinks/plugins/wakelock/ios`)
+  - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
+
+SPEC REPOS:
+  trunk:
+    - AMap3DMap
+    - AMapFoundation
+    - AMapLocation
+    - AMapSearch
+    - BSGridCollectionViewLayout
+    - BSImagePicker
+    - BSImageView
+    - FMDB
+    - mob_pushsdk
+    - MOBFoundation
+    - Reachability
+    - WechatOpenSDK
+
+EXTERNAL SOURCES:
+  amap_core_fluttify:
+    :path: ".symlinks/plugins/amap_core_fluttify/ios"
+  amap_location_fluttify:
+    :path: ".symlinks/plugins/amap_location_fluttify/ios"
+  amap_map_fluttify:
+    :path: ".symlinks/plugins/amap_map_fluttify/ios"
+  amap_search_fluttify:
+    :path: ".symlinks/plugins/amap_search_fluttify/ios"
+  connectivity:
+    :path: ".symlinks/plugins/connectivity/ios"
+  core_location_fluttify:
+    :path: ".symlinks/plugins/core_location_fluttify/ios"
+  Flutter:
+    :path: Flutter
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  fluwx:
+    :path: ".symlinks/plugins/fluwx/ios"
+  foundation_fluttify:
+    :path: ".symlinks/plugins/foundation_fluttify/ios"
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
+  map_launcher:
+    :path: ".symlinks/plugins/map_launcher/ios"
+  mobpush_plugin:
+    :path: ".symlinks/plugins/mobpush_plugin/ios"
+  multi_image_picker:
+    :path: ".symlinks/plugins/multi_image_picker/ios"
+  package_info:
+    :path: ".symlinks/plugins/package_info/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
+  screen:
+    :path: ".symlinks/plugins/screen/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
+  video_player:
+    :path: ".symlinks/plugins/video_player/ios"
+  wakelock:
+    :path: ".symlinks/plugins/wakelock/ios"
+  webview_flutter:
+    :path: ".symlinks/plugins/webview_flutter/ios"
+
+SPEC CHECKSUMS:
+  AMap3DMap: fc7c911f5cf079d544ad7faec256c9554cbbb202
+  amap_core_fluttify: bc2e4245c6a6d869727ed16b009a9fa3dbefcf4a
+  amap_location_fluttify: b273a9b719a7f877ba426d1c6aeadd520e0bf7b6
+  amap_map_fluttify: 176c1c6f07f59564a0e7da0e30dada7da56b99aa
+  amap_search_fluttify: 1654f7c14dd5e690561812dc76576d4fdabeacfb
+  AMapFoundation: 3638198dfa40be54648570c3520edefad288286b
+  AMapLocation: a46c30d9930d0f3a3bd21139d8f845d10ac3f01d
+  AMapSearch: a048bcca3bf0b8083345070e1f193f814bd8dc01
+  BSGridCollectionViewLayout: 333dcb457a5a3bdd9212607ab5756553dcfe06cb
+  BSImagePicker: 07404254f2fcdaf5a2eb403c0f8c337267ce8738
+  BSImageView: a149459433a2687157d034c78e059d30ac7f2544
+  connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
+  core_location_fluttify: 24cc9dcd986ac7059916632d2cb3babb1568ff61
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
+  fluwx: 07a55ed66bf3a4961e836a2a411b02dcada32902
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  foundation_fluttify: 0c45145e3fad1fb99188e4979daed5b24cd9b278
+  image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
+  map_launcher: e325db1261d029ff33e08e03baccffe09593ffea
+  mob_pushsdk: 5f266bfce36dcfda9abf2651da898735cca7a725
+  MOBFoundation: 606bc4c10ff4c6ac573c09f5081a39c75316bc7b
+  mobpush_plugin: 7b5a56692c538bc06e0386916cf7b21f77c1eb09
+  multi_image_picker: 58577ab96d99b35c82d626db7d81906d14c2b667
+  package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  screen: abd91ca7bf3426e1cc3646d27e9b2358d6bf07b0
+  shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
+  sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
+  url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
+  video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
+  wakelock: 0d4a70faf8950410735e3f61fb15d517c8a6efc4
+  webview_flutter: d2b4d6c66968ad042ad94cbb791f5b72b4678a96
+  WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
+
+PODFILE CHECKSUM: a75497545d4391e2d394c3668e20cfb1c2bbd4aa
+
+COCOAPODS: 1.9.3

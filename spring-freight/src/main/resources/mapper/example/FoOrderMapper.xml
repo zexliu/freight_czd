@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wiki.zex.cloud.example.mapper.FoOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wiki.zex.cloud.example.entity.FoOrder">
+        <id column="id" property="id"/>
+        <result column="delivery_id" property="deliveryId"/>
+        <result column="user_id" property="userId"/>
+        <result column="driver_id" property="driverId"/>
+        <result column="amount" property="amount"/>
+        <result column="confirm_status" property="confirmStatus"/>
+        <result column="transport_status" property="transportStatus"/>
+        <result column="pay_status" property="payStatus"/>
+        <result column="evaluate_status" property="evaluateStatus"/>
+        <result column="driver_evaluate_status" property="driverEvaluateStatus"/>
+        <result column="cancel_status" property="cancelStatus"/>
+        <result column="refund_status" property="refundStatus"/>
+        <result column="driver_pay_status" property="driverPayStatus"/>
+    </resultMap>
+    <select id="orderedDrivers" resultType="wiki.zex.cloud.example.resp.SimpleDriverResp">
+        select su.id,
+               su.username,
+               su.mobile,
+               su.nickname,
+               su.avatar,
+               su.create_at,
+               fde.car_long,
+               fde.car_model
+        from sy_user su
+                 left join fo_driver_extension fde on su.id = fde.user_id
+                 left join fo_order fo on su.id = fo.driver_id
+        where fo.user_id = #{userId}
+        group by su.id
+    </select>
+    <select id="list" resultType="wiki.zex.cloud.example.resp.OrderResp">
+        select fde.real_name driver_nickname,
+        fde.avatar driver_avatar,
+        dfu.mobile driver_mobile,
+        fdeu.real_name user_nickname,
+        fdeu.avatar user_avatar,
+        ufu.mobile user_mobile,
+        fdg.load_province_code,
+        fdg.load_city_code,
+        fdg.load_district_code,
+        fdg.unload_province_code,
+        fdg.unload_city_code,
+        fdg.unload_district_code,
+        fdg.load_start_at,
+        fdg.load_end_at,
+        fdg.category_name,
+        fo.amount,
+        fo.freight_amount,
+        fo.pay_status,
+        fo.refund_status,
+        fo.confirm_status,
+        fo.evaluate_status,
+        fo.cancel_status,
+        fo.driver_evaluate_status,
+        fo.transport_status,
+        fo.master_pay_amount,
+        fo.driver_pay_status,
+        fo.user_id,
+        fo.driver_id,
+        fo.id order_id,
+        fo.delivery_id,
+        fo.protocol_status,
+        fo.create_at,
+        fde.car_no
+        from fo_order fo
+        left join sy_user ufu on ufu.id = fo.user_id
+        left join sy_user dfu on dfu.id = fo.driver_id
+        left join fo_deliver_goods fdg on fo.delivery_id = fdg.id
+        left join fo_driver_extension fde on fde.user_id = fo.driver_id
+        left join fo_delivery_extension fdeu on fdeu.user_id = fo.user_id
+        <where>
+            1=1
+            <if test="userId != null">
+                and fo.user_id = #{userId}
+            </if>
+            <if test="cancelStatus != null">
+                and fo.cancel_status = #{cancelStatus}
+            </if>
+            <if test="confirmStatus != null">
+                and fo.confirm_status = #{confirmStatus}
+            </if>
+            <if test="deliveryId != null">
+                and fo.delivery_id = #{deliveryId}
+            </if>
+            <if test="driverEvaluateStatus != null">
+                and fo.driver_evaluate_status = #{driverEvaluateStatus}
+            </if>
+            <if test="evaluateStatus != null">
+                and fo.evaluate_status = #{evaluateStatus}
+            </if>
+            <if test="driverId != null">
+                and fo.driver_id = #{driverId}
+            </if>
+            <if test="payStatus != null">
+                and fo.pay_status = #{payStatus}
+            </if>
+            <if test="refundStatus != null">
+                and fo.refund_status = #{refundStatus}
+            </if>
+            <if test="transportStatus != null">
+                and fo.transport_status = #{transportStatus}
+            </if>
+            <if test="driverPayStatus != null">
+                and fo.driver_pay_status = #{driverPayStatus}
+            </if>
+            <if test="protocolStatus != null">
+                <if test="protocolStatus">
+                    and fo.protocol_status = 1
+                </if>
+                <if test="!protocolStatus">
+                    and fo.protocol_status != 1
+                </if>
+            </if>
+            <if test="startAt != null">
+                and fo.create_at >= #{startAt}
+            </if>
+            <if test="endAt != null">
+                and fo.create_at <![CDATA[ <= ]]> #{endAt}
+            </if>
+        </where>
+    </select>
+    <select id="details" resultType="wiki.zex.cloud.example.resp.OrderDetails">
+        select fo.id,
+               fo.delivery_id,
+               fo.user_id,
+               fo.driver_id,
+               fo.amount,
+               fo.freight_amount,
+               fo.confirm_status,
+               fo.transport_status,
+               fo.pay_status,
+               fo.evaluate_status,
+               fo.driver_evaluate_status,
+               fo.cancel_status,
+               fo.refund_status,
+               fo.protocol_status,
+               fo.driver_pay_status,
+               fo.master_pay_amount,
+               fgd.user_id,
+               fgd.load_province_code,
+               fgd.load_city_code,
+               fgd.load_district_code,
+               fgd.load_address,
+               fgd.load_way_province_code,
+               fgd.load_way_city_code,
+               fgd.load_way_district_code,
+               fgd.load_way_address,
+               fgd.unload_province_code,
+               fgd.unload_city_code,
+               fgd.unload_district_code,
+               fgd.unload_address,
+               fgd.unload_way_province_code,
+               fgd.unload_way_city_code,
+               fgd.unload_way_district_code,
+               fgd.unload_way_address,
+               fgd.category_name,
+               fgd.weight,
+               fgd.volume,
+               fgd.car_type,
+               fgd.car_longs,
+               fgd.car_place_long,
+               fgd.car_models,
+               fgd.load_unload,
+               fgd.load_start_at,
+               fgd.load_end_at,
+               fgd.remark,
+               fgd.require_List,
+               fgd.expect_money,
+               fgd.expect_unit,
+               fgd.create_at,
+               fgd.status,
+               fgd.delete_status,
+               fgd.mark_status,
+               fgd.load_lat,
+               fgd.load_lon,
+               fgd.load_way_lat,
+               fgd.load_way_lon,
+               fgd.unload_lat,
+               fgd.unload_lon,
+               fgd.unload_way_lat,
+               fgd.unload_way_lon,
+               fgd.package_mode,
+               usu.avatar   user_avatar,
+               usu.nickname user_name,
+               usu.mobile   user_mobile,
+               dsu.avatar   driver_avatar,
+               dsu.mobile   driver_mobile,
+               dsu.nickname driver_name,
+               fde.company_name
+        from fo_order fo
+                 left join fo_deliver_goods fgd on fgd.id = fo.delivery_id
+                 left join sy_user usu on usu.id = fo.user_id
+                 left join sy_user dsu on dsu.id = fo.driver_id
+                 left join fo_delivery_extension fde on fo.user_id = fde.user_id
+        where fo.id = #{id}
+    </select>
+
+</mapper>

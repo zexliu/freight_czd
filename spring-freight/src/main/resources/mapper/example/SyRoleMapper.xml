@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wiki.zex.cloud.example.mapper.SyRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wiki.zex.cloud.example.entity.SyRole">
+        <id column="id" property="id"/>
+        <result column="role_name" property="roleName"/>
+        <result column="role_code" property="roleCode"/>
+        <result column="create_at" property="createAt"/>
+        <result column="description" property="description"/>
+        <result column="seq" property="seq"/>
+    </resultMap>
+    <select id="findRolesByUserId" resultType="wiki.zex.cloud.example.resp.SyRoleResp">
+        select sr.*
+        from sy_role sr
+        where sr.id in (
+            select surr.role_id
+            from sy_user_role_rel surr
+            where surr.user_id = #{userId}
+            union all
+            select sdrr.role_id
+            from sy_dept_role_rel sdrr
+                     left join sy_user_dept_rel sudr
+                               on sdrr.dept_id = sudr.dept_id
+            where sudr.user_id = #{userId}
+        )
+        group by sr.id
+    </select>
+    <select id="findRoleCodesByPermissionId" resultType="java.lang.String">
+        select  sr.role_code from   sy_role sr
+                left join sy_role_permission_rel srpr on srpr.role_id = sr.id
+        where  srpr.permission_id = #{permissionId}
+    </select>
+
+</mapper>

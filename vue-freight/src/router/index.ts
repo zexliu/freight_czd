@@ -1,0 +1,22 @@
+import Vue from 'vue'
+import Router, { RawLocation } from 'vue-router'
+import { constantRouterMap } from '@/config/router.config'
+
+// hack router push callback
+const originalPush = Router.prototype.push
+
+Router.prototype.push = function push(location: RawLocation) {
+  return (<any>originalPush.call(this, location)).catch((error: any) => error)
+}
+
+Vue.use(Router)
+
+export default new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  // scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: function(to: any, from: any, savedPosition: any) {
+    return { x: 0, y: 0 }
+  },
+  routes: constantRouterMap
+})

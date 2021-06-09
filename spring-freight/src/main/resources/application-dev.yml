@@ -1,0 +1,62 @@
+spring:
+  datasource:
+    url: jdbc:p6spy:mysql://localhost:3306/freight?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 666666
+    timeout: 3600ms #超时时间
+    lettuce:
+      pool:
+        max-active: 8 #最大连接数
+        max-idle: 8 #最大空闲连接 默认8
+        max-wait: -1ms #默认-1 最大连接阻塞等待时间
+        min-idle: 0 #最小空闲连接
+  flyway:
+    clean-on-validation-error: true #当发现校验错误时是否自动调用clean   生产环境禁用!!!!!!!!!
+    enabled: true  #是否开启flyWay
+    baseline-on-migrate: true
+    baseline-version: 1  #开始执行基准迁移时对现有的schema的版本打标签，默认值为1.
+    check-location: true #检查迁移脚本的位置是否存在
+    encoding: UTF-8  #设置迁移时的编码，
+    ignore-future-migrations: true # 当读取元数据表时是否忽略错误的迁移
+    init-sqls: #当初始化好连接时要执行的SQL
+    out-of-order: false
+    sql-migration-prefix: V #迁移文件的前缀，默认为V.
+    sql-migration-separator: __ #迁移脚本的文件名分隔符，默认__
+    sql-migration-suffixes: #迁移脚本的后缀，默认为.sql
+      - .sql
+    table: flyway_schema_history #使用的元数据表名
+    validate-on-migrate: true #迁移时是否效验
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: root
+    password: 666666
+wechat:
+  mch-id: 1602189471
+  mch-key: 54ZZRghS7S25sNJfWHYU4PyuqOJUBhpU
+  key-path: /Users/zex/workspace/freight/spring-freight/src/main/resources/static/apiclient_cert.p12
+  notify-url: http://api.zex.nat300.top/api/v1/pay/hooks/notify
+  master-app-id: wx56c14b5a20672152
+  master-app-secret: 1d7355e4eb6dedecd8deaaef34a519f3
+  driver-app-id: wx3f0a32fbe408864f
+  driver-app-secret: d011d581b6c86f1643a775cda4e20134
+alipay:
+  appId: appId
+  privateKey: 商户私钥
+  aliPayPublicKey: 支付宝公钥
+  notifyUrl: http://xxx.com/notify
+  returnUrl: http://xxx.com/return
+  sandbox: true #是否使用沙箱
+
+
+#商户号 1602189471
+files-location: /Users/zex/upload_files
+#host-url: http://192.168.110.188:8080
+host-url: http://api.zex.nat300.top
+server:
+  port: 8088

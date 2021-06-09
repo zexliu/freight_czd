@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wiki.zex.cloud.example.mapper.FoTransactionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wiki.zex.cloud.example.entity.FoTransaction">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="target_id" property="targetId" />
+        <result column="type" property="type" />
+        <result column="amount" property="amount" />
+        <result column="incr_status" property="incrStatus" />
+        <result column="create_at" property="createAt" />
+    </resultMap>
+
+
+    <select id="balance" resultType="java.math.BigDecimal">
+        select SUM(inc_amount) - SUM(sub_amount) amount
+        from (
+        select SUM(amount) inc_amount, 0 sub_amount
+        from fo_transaction
+        <where>
+            incr_status is true
+            <if test="userId != null">and user_id = #{userId}</if>
+            <if test="startAt != null">and create_at >= #{startAt}</if>
+            <if test="endAt != null">and create_at <![CDATA[<=]]> #{startAt}</if>
+            <if test="incrStatus != null">and incr_status = #{incrStatus}</if>
+            <if test="type != null">and type = #{type}</if>
+        </where>
+        union all
+        select 0 inc_amount, SUM(amount) sub_amount
+        from fo_transaction
+        <where>
+            incr_status is false
+            <if test="userId != null">and user_id = #{userId}</if>
+            <if test="startAt != null">and create_at >= #{startAt}</if>
+            <if test="endAt != null">and create_at <![CDATA[<=]]> #{startAt}</if>
+            <if test="incrStatus != null">and incr_status = #{incrStatus}</if>
+            <if test="type != null">and type = #{type}</if>
+        </where>
+        )as t
+
+    </select>
+</mapper>

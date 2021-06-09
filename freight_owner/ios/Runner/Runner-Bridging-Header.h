@@ -1,0 +1,6 @@
+#import "GeneratedPluginRegistrant.h"
+#import "DetectionViewController.h"
+#import "LivenessViewController.h"
+#import "IDLFaceSDK/IDLFaceSDK.h"
+#import "LivingConfigModel.h"
+#import "AipOcrSdk/AipOcrSdk.h"

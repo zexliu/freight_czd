@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>车真多司机</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>weixin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wx3f0a32fbe408864f</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>weixinULAPI</string>
+		<string>weixin</string>
+		<string>comgooglemaps</string>
+		<string>baidumap</string>
+		<string>iosamap</string>
+		<string>waze</string>
+		<string>yandexmaps</string>
+		<string>yandexnavi</string>
+		<string>citymapper</string>
+		<string>mapsme</string>
+		<string>osmandmaps</string>
+		<string>dgis</string>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MOBAppKey</key>
+	<string>3059b5b2e0eab</string>
+	<key>MOBAppSecret</key>
+	<string>030267290b9f02dbb3f3a69835c395b8</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>请求访问媒体资料库</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>请求访问日历</string>
+	<key>NSCameraUsageDescription</key>
+	<string>确保审核认证等相关功能正常使用</string>
+	<key>NSContactsUsageDescription</key>
+	<string>请求访问通讯录</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>这使我们能够使用您的位置信息来为您提供某些功能 例如更准确的为您提供附近货源的匹配</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>这使我们能够使用您的位置信息来为您提供某些功能 例如更准确的为您提供附近货源的匹配</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>这使我们能够使用您的位置信息来为您提供某些功能 例如更准确的为您提供附近货源的匹配</string>
+	<key>NSMotionUsageDescription</key>
+	<string>请求访问运动与健康</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>这使我们能够使用您的相册信息来为您提供某些功能 例如上传审核认证信息</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>请求使用语音识别</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
+</dict>
+</plist>

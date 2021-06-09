@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wiki.zex.cloud.example.mapper.FoOrderProcessMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wiki.zex.cloud.example.entity.FoOrderProcess">
+        <id column="id" property="id" />
+        <result column="type" property="type" />
+        <result column="create_at" property="createAt" />
+        <result column="params" property="params" />
+        <result column="order_id" property="orderId" />
+        <result column="user_id" property="userId" />
+        <result column="user_type" property="userType" />
+        <result column="description" property="description" />
+    </resultMap>
+
+</mapper>

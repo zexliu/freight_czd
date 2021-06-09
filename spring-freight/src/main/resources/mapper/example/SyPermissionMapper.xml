@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wiki.zex.cloud.example.mapper.SyPermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wiki.zex.cloud.example.entity.SyPermission">
+        <id column="id" property="id"/>
+        <result column="permission_name" property="permissionName"/>
+        <result column="permission_code" property="permissionCode"/>
+        <result column="permission_path" property="permissionPath"/>
+        <result column="description" property="description"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="create_at" property="createAt"/>
+        <result column="method_type" property="methodType"/>
+        <result column="seq" property="seq"/>
+    </resultMap>
+    <select id="getByRoleId" resultType="wiki.zex.cloud.example.entity.SyPermission">
+        select sp.id,
+               sp.permission_name,
+               sp.permission_code,
+               sp.permission_path,
+               sp.seq,
+               sp.description,
+               sp.parent_id,
+               sp.method_type,
+               sp.create_at
+        from sy_permission sp
+                 left join sy_role_permission_rel srpr on srpr.permission_id = sp.id
+        where srpr.role_id = #{roleId}
+    </select>
+
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wiki.zex.cloud.example.mapper.FoEvaluationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wiki.zex.cloud.example.entity.FoEvaluation">
+        <id column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
+        <result column="tags" property="tags"/>
+        <result column="description" property="description"/>
+        <result column="create_at" property="createAt"/>
+        <result column="anonymous" property="anonymous"/>
+        <result column="user_id" property="userId"/>
+        <result column="target_id" property="targetId"/>
+        <result column="type" property="type"/>
+    </resultMap>
+    <select id="statistical" resultType="wiki.zex.cloud.example.resp.EvaluationStatisticalResp">
+
+        select sum(level1) level1_count, sum(level2) level2_count, sum(level3) level3_count
+        from (
+                 select count(1) level1, 0 level2, 0 level3
+                 from fo_evaluation
+                 where target_id = #{userId}
+                   and type = #{type}
+                 union all
+                 select 0 level1, count(1) level2, 0 level3
+                 from fo_evaluation
+                 where target_id = #{userId}
+                   and type = #{type}
+                 union all
+                 select 0 level1, 0 level2, count(1) level3
+                 from fo_evaluation
+                 where target_id = #{userId}
+                   and type = #{type}
+             ) t
+    </select>
+    <select id="orderEvaluationPage" resultType="wiki.zex.cloud.example.resp.OrderEvaluationResp">
+        select suu.avatar user_avatar,suu.real_name user_name,sud.avatar driver_avatar, sud.nickname driver_name,
+        fdg.load_province_code load_province_code, fdg.load_city_code load_city_code,fdg.load_district_code
+        load_district_code,
+        fdg.unload_province_code unload_province_code ,fdg.unload_city_code unload_city_code, fdg.unload_district_code
+        unload_district_code,
+        fdg.category_name category_name, fo.id order_id ,
+        feu.id user_evaluation_id , feu.tags user_tags,feu.description user_description,feu.create_at
+        user_create_at,feu.level user_level,
+        fed.id driver_evaluation_id , fed.tags driver_tags,fed.description driver_description,fed.create_at
+        driver_create_at,fed.level driver_level
+        from fo_order fo
+        left join sy_user suu on fo.user_id = suu.id
+        left join sy_user sud on fo.driver_id = sud.id
+        left join fo_deliver_goods fdg on fdg.id = fo.delivery_id
+        left join fo_evaluation feu on fo.id = feu.order_id and feu.type = 1
+        left join fo_evaluation fed on fo.id = fed.order_id and fed.type = 2
+        <where>
+            (feu.id is not null or fed.id is not null)
+            <if test="type = 1">
+                and fo.driver_id = #{userId}
+            </if>
+            <if test="type = 2">
+                and fo.user_id = #{userId}
+            </if>
+            <if test="level != null">
+                <if test="type = 1">
+                    and feu.level = #{level}
+                </if>
+                <if test="type = 2">
+                    and fed.level = #{level}
+                </if>
+            </if>
+        </where>
+
+
+    </select>
+
+</mapper>

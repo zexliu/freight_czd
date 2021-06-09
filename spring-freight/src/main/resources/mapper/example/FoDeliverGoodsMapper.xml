@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wiki.zex.cloud.example.mapper.FoDeliverGoodsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="wiki.zex.cloud.example.entity.FoDeliverGoods">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="load_province_code" property="loadProvinceCode"/>
+        <result column="load_city_code" property="loadCityCode"/>
+        <result column="load_district_code" property="loadDistrictCode"/>
+        <result column="load_address" property="loadAddress"/>
+        <result column="load_way_province_code" property="loadWayProvinceCode"/>
+        <result column="load_way_city_code" property="loadWayCityCode"/>
+        <result column="load_way_district_code" property="loadWayDistrictCode"/>
+        <result column="load_way_address" property="loadWayAddress"/>
+        <result column="unload_province_code" property="unloadProvinceCode"/>
+        <result column="unload_city_code" property="unloadCityCode"/>
+        <result column="unload_district_code" property="unloadDistrictCode"/>
+        <result column="unload_address" property="unloadAddress"/>
+        <result column="unload_way_province_code" property="unloadWayProvinceCode"/>
+        <result column="unload_way_city_code" property="unloadWayCityCode"/>
+        <result column="unload_way_district_code" property="unloadWayDistrictCode"/>
+        <result column="unload_way_address" property="unloadWayAddress"/>
+        <result column="category_name" property="categoryName"/>
+        <result column="weight" property="weight"/>
+        <result column="volume" property="volume"/>
+        <result column="car_type" property="carType"/>
+        <result column="car_longs" property="carLongs"/>
+        <result column="car_place_long" property="carPlaceLong"/>
+        <result column="car_models" property="carModels"/>
+        <result column="load_unload" property="loadUnload"/>
+        <result column="load_start_at" property="loadStartAt"/>
+        <result column="load_end_at" property="loadEndAt"/>
+        <result column="remark" property="remark"/>
+        <result column="require_List" property="requireList"/>
+        <result column="expect_money" property="expectMoney"/>
+        <result column="expect_unit" property="expectUnit"/>
+        <result column="create_at" property="createAt"/>
+    </resultMap>
+    <select id="queryList" resultType="wiki.zex.cloud.example.resp.FoDeliverGoodsResp">
+        select fdg.id,
+        fdg.user_id,
+        fdg.load_province_code,
+        fdg.load_city_code,
+        fdg.load_district_code,
+        fdg.load_address,
+        fdg.load_way_province_code,
+        fdg.load_way_city_code,
+        fdg.load_way_district_code,
+        fdg.load_way_address,
+        fdg.unload_province_code,
+        fdg.unload_city_code,
+        fdg.unload_district_code,
+        fdg.unload_address,
+        fdg.unload_way_province_code,
+        fdg.unload_way_city_code,
+        fdg.unload_way_district_code,
+        fdg.unload_way_address,
+        fdg.category_name,
+        fdg.weight,
+        fdg.volume,
+        fdg.car_type,
+        fdg.car_longs,
+        fdg.car_place_long,
+        fdg.car_models,
+        fdg.load_unload,
+        fdg.load_start_at,
+        fdg.load_end_at,
+        fdg.remark,
+        fdg.require_List,
+        fdg.expect_money,
+        fdg.expect_unit,
+        fdg.create_at,
+        fdg.status,
+        fdg.delete_status,
+        fdg.mark_status,
+        fdg.load_lat,
+        fdg.load_lon,
+        fdg.load_way_lat,
+        fdg.load_way_lon,
+        fdg.unload_lat,
+        fdg.unload_lon,
+        fdg.unload_way_lat,
+        fdg.unload_way_lon,
+        fdg.package_mode,
+        su.avatar,
+        su.nickname,
+        su.mobile,
+        count(distinct fc.from_user_id) call_count,
+        count(distinct fl.user_id) look_count,
+        count(distinct fe.id) evaluation_count
+        from fo_deliver_goods fdg
+        left join sy_user su on su.id = fdg.user_id
+        left join fo_call fc on fdg.id = fc.goods_id
+        left join fo_category fca on fca.category_name = fdg.category_name
+        left join fo_category fcp on fca.category_name = fcp.category_name
+        left join fo_evaluation fe on fe.target_id = fdg.user_id
+        left join fo_look fl on fdg.id = fl.goods_id
+        <where>
+            1=1
+            <if test="userId != null">
+                and fdg.user_id = #{userId}
+            </if>
+            <if test="status != null">
+                and fdg.status = #{status}
+            </if>
+            <if test="deleteStatus != null">
+                and fdg.delete_status = #{deleteStatus}
+            </if>
+            <if test="markStatus != null">
+                and fdg.mark_status = #{markStatus}
+            </if>
+            <if test="loadProvinceCode != null and loadProvinceCode != '' ">
+                and fdg.load_province_code = #{loadProvinceCode}
+            </if>
+            <if test="loadCityCode != null and loadCityCode != '' ">
+                and fdg.load_city_code = #{loadCityCode}
+            </if>
+            <if test="loadDistrictCode != null and loadDistrictCode != '' ">
+                and fdg.load_district_code = #{loadDistrictCode}
+            </if>
+            <if test="unloadProvinceCode != null and unloadProvinceCode != '' ">
+                and fdg.unload_province_code = #{unloadProvinceCode}
+            </if>
+            <if test="unloadCityCode != null and unloadCityCode != '' ">
+                and fdg.unload_city_code = #{unloadCityCode}
+            </if>
+            <if test="unloadDistrictCode != null and unloadDistrictCode != '' ">
+                and fdg.unload_district_code = #{unloadDistrictCode}
+            </if>
+            <if test="startAt != null">
+                and fdg.create_at >= #{startAt}
+            </if>
+            <if test="endAt != null">
+                and fdg.create_at <![CDATA[  <= ]]> #{endAt}
+            </if>
+
+            <if test="loadStartAt != null">
+                and fdg.load_start_at >= #{loadStartAt}
+            </if>
+            <if test="loadEndAt != null">
+                and fdg.load_end_at <![CDATA[  <= ]]> #{loadEndAt}
+            </if>
+            <if test="carType != null and carType != '' ">
+                and fdg.car_type = #{carType}
+            </if>
+            <if test="weights != null">
+                and
+                <foreach item="item" collection="weights" separator="or" open="(" close=")" index="">
+                    fdg.weight >= #{item.ge} and fdg.weight <![CDATA[  <= ]]> #{item.le}
+                </foreach>
+            </if>
+            <if test="carLongs != null">
+                and
+                <foreach item="item" collection="carLongs" separator="or" open="(" close=")" index="">
+                    find_in_set(#{item}, fdg.car_longs)
+                </foreach>
+            </if>
+            <if test="carModels != null">
+                and
+                <foreach item="item" collection="carModels" separator="or" open="(" close=")" index="">
+                    find_in_set(#{item}, fdg.car_models)
+                </foreach>
+            </if>
+            <if test="categoryName != null ">
+                and
+                <foreach item="item" collection="categoryName" separator="or" open="(" close=")" index="">
+                    fcp.category_name = #{item}
+                </foreach>
+
+            </if>
+            <if test="loadAreas != null ">
+                and
+                <foreach item="item" collection="loadAreas" separator="or" open="(" close=")" index="">
+                    fdg.load_province_code = #{item} or fdg.load_city_code = #{item} or fdg.load_district_code = #{item}
+                </foreach>
+            </if>
+            <if test="unloadAreas != null ">
+                and
+                <foreach item="item" collection="unloadAreas" separator="or" open="(" close=")" index="">
+                    fdg.unload_province_code = #{item} or fdg.unload_city_code = #{item} or fdg.unload_district_code =
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        GROUP BY fdg.id
+        <if test="order != null and order == 'auto'">
+            order by id asc
+        </if>
+        <if test="order != null and order == 'time'">
+            order by create_at desc
+        </if>
+    </select>
+
+    <resultMap id="Details" type="wiki.zex.cloud.example.resp.FoDeliverDetails">
+        <collection property="calls" select="wiki.zex.cloud.example.mapper.FoCallMapper.calls" column="deliverId = id"/>
+    </resultMap>
+
+
+    <select id="details" resultMap="Details">
+        select fdg.id,
+               fdg.user_id,
+               fdg.load_province_code,
+               fdg.load_city_code,
+               fdg.load_district_code,
+               fdg.load_address,
+               fdg.load_way_province_code,
+               fdg.load_way_city_code,
+               fdg.load_way_district_code,
+               fdg.load_way_address,
+               fdg.unload_province_code,
+               fdg.unload_city_code,
+               fdg.unload_district_code,
+               fdg.unload_address,
+               fdg.unload_way_province_code,
+               fdg.unload_way_city_code,
+               fdg.unload_way_district_code,
+               fdg.unload_way_address,
+               fdg.category_name,
+               fdg.weight,
+               fdg.volume,
+               fdg.car_type,
+               fdg.car_longs,
+               fdg.car_place_long,
+               fdg.car_models,
+               fdg.load_unload,
+               fdg.load_start_at,
+               fdg.load_end_at,
+               fdg.remark,
+               fdg.require_List,
+               fdg.expect_money,
+               fdg.expect_unit,
+               fdg.create_at,
+               fdg.status,
+               fdg.delete_status,
+               fdg.mark_status,
+               fdg.load_lat,
+               fdg.load_lon,
+               fdg.load_way_lat,
+               fdg.load_way_lon,
+               fdg.unload_lat,
+               fdg.unload_lon,
+               fdg.unload_way_lat,
+               fdg.unload_way_lon,
+               fdg.package_mode,
+               su.avatar   avatar,
+               su.nickname nickname,
+               su.mobile   mobile,
+               fde.company_name
+        from fo_deliver_goods fdg
+                 left join sy_user su on su.id = fdg.user_id
+                 left join fo_delivery_extension fde on fdg.user_id = fde.user_id
+        where fdg.id = #{id}
+
+
+    </select>
+    <select id="getByOrderId" resultType="wiki.zex.cloud.example.entity.FoProtocol">
+        select fo.id                    order_id,
+               fo.amount                amount,
+               fo.freight_amount        freight_amount,
+               fdg.load_start_at        load_start_at,
+               fdg.load_end_at          load_end_at,
+               fdg.load_province_code   load_province_code,
+               fdg.load_city_code       load_city_code,
+               fdg.load_district_code   load_district_code,
+               fdg.unload_province_code unload_province_code,
+               fdg.unload_city_code     unload_city_code,
+               fdg.unload_district_code unload_district_code,
+               fdg.load_address         load_address,
+               fdg.unload_address       unload_address,
+               fdg.category_name        category_name,
+               fdg.car_type             car_type,
+               fdg.car_longs            car_longs,
+               fdg.car_models           car_models,
+               fdg.weight               weight,
+               fdg.volume               volume
+        from fo_order fo
+                 left join fo_deliver_goods fdg on fo.delivery_id = fdg.id
+        where fo.id = #{orderId}
+    </select>
+
+</mapper>
